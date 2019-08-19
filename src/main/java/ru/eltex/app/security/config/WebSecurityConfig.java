@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/signup").permitAll()
                 .anyRequest().authenticated()
@@ -35,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("login")
                 .passwordParameter("password")
                 .loginPage("/")
-
+                .successForwardUrl("/index")
                 .permitAll()
                 .and()
                 .logout()
@@ -45,8 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         super.configure(web);
-/*        web.ignoring()
-                .antMatchers("/static/**");*/
+        web.ignoring()
+                .antMatchers("/images/**")
+                .antMatchers("/js/**")
+                .antMatchers("/templates/**");
     }
 
     @Override

@@ -27,6 +27,12 @@ public class HomeController {
         return "authorization";
     }
 
+    @PostMapping("/")
+    public String authorization() {
+
+        return "signup";
+    }
+
     @GetMapping("/index")
     public String index() {
         log.info("Index");
