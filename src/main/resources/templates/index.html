@@ -9,15 +9,40 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-<div id="app">
-    {{ message }}
-</div>
-<div class="container top-buffer">
+<div class="container mt-4" id="main">
     <div class="row">
-        <div class="col"></div>
+        <div class="col">
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" v-if="showprogress">
+                <div class="toast-header">
+                    <strong class="mr-auto">Test end ...</strong>
+                </div>
+                <div class="toast-body">
+                    in {{sec}}
+                </div>
+            </div>
+        </div>
         <div class="col-5">
-            <div class="justify-content-center">
+            <div class="row">
                 <img th:src="@{/images/eltex.png}" class="img-fluid"/>
+            </div>
+            <div class="progress row" v-if="showprogress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                     :style="{'width':percent+'%'}"
+                     :aria-valuenow="percent"
+                     aria-valuemin="0"
+                     aria-valuemax="100">{{percent}}%
+                </div>
+            </div>
+            <div class="row justify-content-around mt-2">
+                <button type="button" class="btn btn-primary col-md-5 " v-on:click="progress">{{namebutton}}</button>
+                <a href="/logout" class="btn btn-outline-secondary col-md-5" role="button"
+                   aria-pressed="true">Logout</a>
+            </div>
+            <div class="alert alert-success mt-2" role="alert" v-if="showstatus">
+                <h4 class="alert-heading">Well done!</h4>
+                <p>Result of test is {{random}}</p>
+                <hr>
+                <p class="mb-0">You can restart your test!</p>
             </div>
         </div>
         <div class="col"></div>

@@ -3,6 +3,7 @@ package ru.eltex.app.controllers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,10 @@ public class HomeController {
     IUserStore iUserStore;
 
     @GetMapping("/")
-    public String authorization(ModelMap model, HttpServletRequest httpServletRequest) {
+    public String authorization(ModelMap model, HttpServletRequest httpServletRequest, Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return "redirect:/index";
+        }
         if (httpServletRequest.getParameterMap().containsKey("error")) {
             model.addAttribute("error", true);
         }
