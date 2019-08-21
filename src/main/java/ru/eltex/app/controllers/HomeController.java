@@ -44,9 +44,13 @@ public class HomeController {
     }
 
     @PostMapping("/signup")
-    public String signup(User user) {
+    public String signup(User user, ModelMap model) {
         log.info("User was sign up");
-        iUserStore.saveUser(user);
-        return "redirect:/";
+        if (iUserStore.saveUser(user)) {
+            return "redirect:/";
+        } else {
+            model.addAttribute("error", true);
+            return "signup";
+        }
     }
 }

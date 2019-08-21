@@ -1,7 +1,6 @@
 package ru.eltex.app.store;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.eltex.app.model.User;
@@ -35,13 +34,19 @@ public class UserService implements IUserStore {
     }
 
     @Override
-    public void saveUser(User user) {
-        try (FileWriter fileWriter = new FileWriter(PATH, true)) {
-            fileWriter.write(user.getLogin() + ":" + passwordEncoder.encode(user.getPassword())
-                    + System.getProperty("line.separator"));
-        } catch (IOException e) {
-            e.printStackTrace();
+    public boolean saveUser(User user) {
+        User oldUser =readUserByName(user.getLogin());
+        if(oldUser==null) {
+            try (FileWriter fileWriter = new FileWriter(PATH, true)) {
+                fileWriter.write(user.getLogin() + ":" + passwordEncoder.encode(user.getPassword())
+                        + System.getProperty("line.separator"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return true;
         }
-        System.out.println("json created!");
+        else {
+            return false;
+        }
     }
 }

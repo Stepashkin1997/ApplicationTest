@@ -12,9 +12,9 @@
     <div class="row">
         <div class="col"></div>
         <div class="col-5">
-            <div class="justify-content-center">
+            <a class="justify-content-center" href="/">
                 <img th:src="@{/images/eltex.png}" class="img-fluid" />
-            </div>
+            </a>
             <div class="form">
                 <form class="form-horizontal justify-content-center" role="form" method="POST" action="/signup">
                     <div class="form-group">
@@ -38,9 +38,9 @@
                             </div>
                         </div>
                     </div>
-    <!--                <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
-                        Invalid username or password.
-                    </div>-->
+                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+                        Username or password is exist.
+                    </div>
                 </form>
             </div>
         </div>
