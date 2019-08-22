@@ -35,6 +35,7 @@ public class HomeController {
     public String index() {
         log.info("Index");
         return "index";
+
     }
 
     @GetMapping("/signup")

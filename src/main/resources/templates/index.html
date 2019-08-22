@@ -36,7 +36,10 @@
                 </div>
             </div>
             <div class="row justify-content-around mt-2">
-                <button type="button" class="btn btn-primary col-md-5 " v-on:click="progress">{{namebutton}}</button>
+                <button type="button" class="btn btn-primary col-md-5 " v-on:click="reset" v-if="showprogress"
+                        :disabled="isButtonDisabled">{{namebutton}}</button>
+                <button type="button" class="btn btn-primary col-md-5 " v-on:click="progress" v-else
+                        :disabled="isButtonDisabled">{{namebutton}}</button>
                 <a href="/logout" class="btn btn-outline-secondary col-md-5" role="button"
                    aria-pressed="true">Logout</a>
             </div>
