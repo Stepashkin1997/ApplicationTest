@@ -9,11 +9,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 @Service
 public class UserService implements IUserStore {
-    private final String PATH = "/home/nikita/base.txt";
+    private final String PATH = "/tmp/base.txt";
     @Autowired
     private PasswordEncoder passwordEncoder;
 
